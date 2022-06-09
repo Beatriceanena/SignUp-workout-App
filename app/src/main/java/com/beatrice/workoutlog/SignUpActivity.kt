@@ -3,10 +3,12 @@ package com.beatrice.workoutlog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
     lateinit var etFirstname:TextInputEditText
@@ -72,6 +74,10 @@ class SignUpActivity : AppCompatActivity() {
             tilEmail1.error="Email is required"
             error=true
         }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            tilEmail1.error="Not a valid address"
+            error=true
+        }
 
         if (password.isBlank()){
             tilPassword.error= "Password is required"
@@ -83,6 +89,11 @@ class SignUpActivity : AppCompatActivity() {
             tilConfirm.error="Confirm Password"
             error=true
 
+        }
+
+        if (password!=confirm){
+            tilConfirm.error="should match"
+            error=true
         }
 
     }
